@@ -1,16 +1,20 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Xml.Schema;
 using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour
 {
 
+    
 
     [Header("Movemant")]
     private float moveSpeed;
     public float walkspeed;
     public float sprintSpeed;
+
+    public float wallRunSpeed;
 
     public float groundDrag;
 
@@ -59,8 +63,11 @@ public class PlayerMovement : MonoBehaviour
         sprinting,
         crouching,
         air,
+        wallrunning,
     }
 
+    public bool crouching;
+    public bool wallrunning;
 
 
     // Start is called before the first frame update
@@ -154,6 +161,14 @@ public class PlayerMovement : MonoBehaviour
     private void StateHandler()
     {
 
+        //Mode - Wallrunning
+        if (wallrunning)
+        {
+            state = MovementState.wallrunning;
+            moveSpeed = wallRunSpeed;
+        }
+
+
         //Mode - Crouching
         if(Input.GetKeyDown(crouchKey))
         {
@@ -246,7 +261,11 @@ public class PlayerMovement : MonoBehaviour
     }
 
 
-
+    public void SetPosition(double x, double y, double z)
+    {
+        Vector3 newPosition = new Vector3((float)x, (float)y, (float)z);
+        transform.position = newPosition;
+    }
 
 
 

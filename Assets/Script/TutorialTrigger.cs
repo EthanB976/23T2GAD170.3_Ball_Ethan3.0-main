@@ -6,33 +6,42 @@ using TMPro;
 public class TutorialTrigger : MonoBehaviour
 {
 
-
-    [SerializeField] private TextMeshPro tutorialText;
-     public GameObject dialogBox;
-     public TextMeshProUGUI dialogueText;
+    [SerializeField] private TextMeshProUGUI tutorialText;
+    [SerializeField] private GameObject uiPanel;
 
 
     private void Start()
     {
-        tutorialText.enabled = false;
+        tutorialText.gameObject.SetActive(false);
+        uiPanel.SetActive(false);
     }
-
-
 
 
     private void OnTriggerStay(Collider other)
     {
         //PLayer triggers method
-        if (other.CompareTag("Player"))
+        if (other.gameObject.tag == "Player")
         {
-            Debug.Log("Stuff = things");
+            Debug.Log("Player Enters");
             //show text on screen
-            tutorialText.enabled = true;
+
+            tutorialText.gameObject.SetActive(true);
+            uiPanel.SetActive(true);
         }
         
     }
 
+    private void OnTriggerExit(Collider other)
+    {
+        if (other.gameObject.tag == "Player")
+        {
+            Debug.Log("Player Exits");
+            //show text on screen
 
+            tutorialText.gameObject.SetActive(false);
+            uiPanel.SetActive(false);
+        }
+    }
 
 
 
