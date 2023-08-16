@@ -1,5 +1,7 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 
 public class WallRunning : MonoBehaviour
@@ -85,7 +87,7 @@ public class WallRunning : MonoBehaviour
         {
             if(pm.wallrunning)
             {
-                StopWallRun();
+               StopWallRun();
             }
         }
     }
@@ -101,7 +103,8 @@ public class WallRunning : MonoBehaviour
     {
         rb.useGravity = false;
         rb.velocity = new Vector3(rb.velocity.x, 0f, rb.velocity.z);
-
+        var grav = -9.8;
+        var x = Math.Min(0, (grav + rb.velocity.x));
         Vector3 wallNormal = wallRight ? rightwallhit.normal : leftwallhit.normal;
 
         Vector3 wallForward = Vector3.Cross(wallNormal, transform.up);

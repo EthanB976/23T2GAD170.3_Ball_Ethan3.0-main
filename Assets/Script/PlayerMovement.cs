@@ -7,7 +7,9 @@ using UnityEngine;
 public class PlayerMovement : MonoBehaviour
 {
 
-    
+    //get audio
+    [SerializeField] private AudioClip playerAudioSource;
+    [SerializeField] private AudioSource jumpSoundEffect;
 
     [Header("Movemant")]
     private float moveSpeed;
@@ -98,8 +100,8 @@ public class PlayerMovement : MonoBehaviour
 
 
         MyInput();
-        SpeedContrtol();
         StateHandler();
+        SpeedContrtol();
 
         //Handle the drag
         if(grounded )
@@ -161,6 +163,17 @@ public class PlayerMovement : MonoBehaviour
     private void StateHandler()
     {
 
+        //Mode - Walking
+        if (grounded)
+        {
+            state = MovementState.walking;
+            moveSpeed = walkspeed;
+        }
+        //Mode - Air
+        else
+        {
+            state = MovementState.air;
+        }
         //Mode - Wallrunning
         if (wallrunning)
         {
@@ -170,7 +183,7 @@ public class PlayerMovement : MonoBehaviour
 
 
         //Mode - Crouching
-        if(Input.GetKeyDown(crouchKey))
+        if(Input.GetKey(crouchKey))
         {
             state = MovementState.crouching;
             moveSpeed = crouchSpeed;
@@ -183,18 +196,6 @@ public class PlayerMovement : MonoBehaviour
             state = MovementState.sprinting;
             moveSpeed = sprintSpeed;
 
-        }
-        //Mode - Walking
-        else if (grounded)
-        {
-            state = MovementState.walking;
-            moveSpeed = walkspeed;
-        }
-
-        //Mode - Air
-        else
-        {
-            state = MovementState.air;
         }
     }
 
@@ -248,6 +249,7 @@ public class PlayerMovement : MonoBehaviour
         //jump once
         rb.AddForce(transform.up * jumpForce, ForceMode.Impulse);
 
+        //playerAudioSource.PlayOneShot(jumpSoundEffect);
     }
 
 
