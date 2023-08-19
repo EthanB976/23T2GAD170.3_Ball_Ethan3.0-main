@@ -14,6 +14,7 @@ public class Button : MonoBehaviour
 
     private void Start()
     {
+        //set game objects to false so they can be activated later on
         miniPlatformSpawn.SetActive(false);
         ball.SetActive(false);
     }
@@ -22,14 +23,18 @@ public class Button : MonoBehaviour
     {
         if (other.gameObject.CompareTag("Player"))
         {
+            //when player enters
             if (Input.GetKeyDown(KeyCode.E))
             {
+                //in player presses E then platforms/balls spawn in
                 miniPlatformSpawn.SetActive(true);
                 ball.SetActive(true);
+                //set random value of balls
                 int numBallsToSpawn = UnityEngine.Random.Range(minBallsToSpawn, maxBallsToSpawn + 1);
 
                 for (int i = 0; i < numBallsToSpawn; i++)
                 {
+                    //spawn in random amount of balls
                     Instantiate(ball, ballSpawnPoint.position, Quaternion.identity);
                 }
             }

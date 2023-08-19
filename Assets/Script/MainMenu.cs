@@ -7,12 +7,14 @@ public class MainMenu : MonoBehaviour
 {
    public void playGame()
     {
+        //load next scene 1
         SceneManager.LoadScene(1);
     }
 
 
     public void QuitGame()
     {
+        //quit game
         Application.Quit();
     }
 

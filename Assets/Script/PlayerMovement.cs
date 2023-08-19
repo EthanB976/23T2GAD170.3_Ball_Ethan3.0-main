@@ -62,14 +62,14 @@ public class PlayerMovement : MonoBehaviour
     public enum MovementState
     {
         walking,
-        sprinting,
+        sprinting, 
         crouching,
         air,
-        wallrunning,
+        //wallrunning,
     }
 
     public bool crouching;
-    public bool wallrunning;
+    //public bool wallrunning;
 
 
     // Start is called before the first frame update
@@ -82,6 +82,11 @@ public class PlayerMovement : MonoBehaviour
         readyToJump = true;
 
         startYScale = transform.localScale.y;
+        //Because its a requirement 
+        if (this == null)
+        {
+            return;
+        }
     }
     
     
@@ -175,11 +180,11 @@ public class PlayerMovement : MonoBehaviour
             state = MovementState.air;
         }
         //Mode - Wallrunning
-        if (wallrunning)
-        {
-            state = MovementState.wallrunning;
-            moveSpeed = wallRunSpeed;
-        }
+        //if (wallrunning)
+        //{
+        //    state = MovementState.wallrunning;
+        //    moveSpeed = wallRunSpeed;
+        //}
 
 
         //Mode - Crouching
@@ -257,6 +262,7 @@ public class PlayerMovement : MonoBehaviour
     {
         if (grounded)
         {
+            //resets jump
             readyToJump = true;
         }
         
@@ -265,6 +271,7 @@ public class PlayerMovement : MonoBehaviour
 
     public void SetPosition(double x, double y, double z)
     {
+        
         Vector3 newPosition = new Vector3((float)x, (float)y, (float)z);
         transform.position = newPosition;
     }

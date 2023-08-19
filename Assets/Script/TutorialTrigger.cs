@@ -12,6 +12,7 @@ public class TutorialTrigger : MonoBehaviour
 
     private void Start()
     {
+        //set objects to false so they can be activated
         tutorialText.gameObject.SetActive(false);
         uiPanel.SetActive(false);
     }

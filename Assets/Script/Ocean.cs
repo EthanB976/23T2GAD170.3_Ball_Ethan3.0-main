@@ -12,12 +12,10 @@ public class Ocean : MonoBehaviour
     {
         if (other.gameObject.tag == "Player")
         {
+            //resets players position when the hit the ocean
             position.SetPosition(respawnPosition.position.x, respawnPosition.position.y, respawnPosition.position.z);
         }
     }
-
-
-
 
 
 
